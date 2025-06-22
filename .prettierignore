@@ -1,0 +1,39 @@
+# Dependencies
+node_modules
+vendor
+
+# Build outputs
+dist
+build
+public/build
+public/hot
+
+# Laravel specific
+storage
+bootstrap/cache
+.env
+.env.*
+
+# Logs
+*.log
+
+# Lock files
+package-lock.json
+composer.lock
+
+# IDE
+.vscode
+.idea
+
+# Git
+.git
+
+# Config files that shouldn't be formatted
+*.config.js
+*.config.ts
+vite.config.js
+tailwind.config.js
+
+# Generated files
+*.min.js
+*.min.css 
