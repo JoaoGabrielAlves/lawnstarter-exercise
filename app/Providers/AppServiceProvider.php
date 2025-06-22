@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Repositories\Contracts\StarWarsRepositoryContract;
+use App\Repositories\StarWarsRepository;
+use App\Services\Contracts\StarWarsServiceContract;
+use App\Services\StarWarsService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +15,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Bind Repository contracts to implementations
+        $this->app->bind(StarWarsRepositoryContract::class, StarWarsRepository::class);
+
+        // Bind Service contracts to implementations
+        $this->app->bind(StarWarsServiceContract::class, StarWarsService::class);
     }
 
     /**
