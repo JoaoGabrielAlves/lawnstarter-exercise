@@ -93,7 +93,7 @@ final class StarWarsService implements StarWarsServiceContract
     {
         return $search
             ? $this->repository->search($resource, $search, $page)
-            : $this->repository->getPaginated($resource, $page);
+            : $this->repository->getPaginated("/{$resource}/", $page);
     }
 
     private function validateResource(string $resource): void
