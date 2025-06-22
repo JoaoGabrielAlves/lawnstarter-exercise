@@ -37,3 +37,8 @@ tailwind.config.js
 # Generated files
 *.min.js
 *.min.css 
+
+*.md
+*.json
+.prettierrc
+*.css

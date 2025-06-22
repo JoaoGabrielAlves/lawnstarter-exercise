@@ -1,43 +1,43 @@
 {
-    "compilerOptions": {
-        "target": "ES2022",
-        "lib": ["DOM", "DOM.Iterable", "ESNext"],
-        "module": "ESNext",
-        "skipLibCheck": true,
-        "allowJs": false,
-        "esModuleInterop": false,
-        "allowSyntheticDefaultImports": true,
-        "strict": true,
-        "forceConsistentCasingInFileNames": true,
-        "moduleResolution": "bundler",
-        "allowImportingTsExtensions": true,
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "noEmit": true,
-        "jsx": "react-jsx",
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true,
-        "useDefineForClassFields": true,
-        "baseUrl": ".",
-        "paths": {
-            "@/*": ["resources/js/*"],
-            "@/components/*": ["resources/js/components/*"],
-            "@/hooks/*": ["resources/js/hooks/*"],
-            "@/utils/*": ["resources/js/utils/*"],
-            "@/types/*": ["resources/js/types/*"],
-            "@/services/*": ["resources/js/services/*"]
-        }
-    },
-    "include": [
-        "resources/js/**/*.ts",
-        "resources/js/**/*.tsx",
-        "resources/js/**/*.d.ts"
-    ],
-    "exclude": ["node_modules", "dist", "build", "vendor"],
-    "references": [
-        {
-            "path": "./tsconfig.node.json"
-        }
-    ]
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "allowJs": false,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "useDefineForClassFields": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["resources/js/*"],
+      "@/components/*": ["resources/js/components/*"],
+      "@/hooks/*": ["resources/js/hooks/*"],
+      "@/utils/*": ["resources/js/utils/*"],
+      "@/types/*": ["resources/js/types/*"],
+      "@/services/*": ["resources/js/services/*"]
+    }
+  },
+  "include": [
+    "resources/js/**/*.ts",
+    "resources/js/**/*.tsx",
+    "resources/js/**/*.d.ts"
+  ],
+  "exclude": ["node_modules", "dist", "build", "vendor"],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }
