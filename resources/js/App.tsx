@@ -1,20 +1,12 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { BrowserRouter } from 'react-router-dom';
+
+import Header from '@/components/Header';
+import AppRoutes from './Routes';
 
 const queryClient = new QueryClient();
-
-const App: React.FC = () => {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <div className='min-h-screen bg-gray-50'>
-        <h1>Hello World</h1>
-      </div>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
-  );
-};
 
 const container = document.getElementById('root');
 
@@ -23,4 +15,15 @@ if (!container) {
 }
 
 const root = ReactDOM.createRoot(container);
-root.render(<App />);
+
+root.render(
+  <QueryClientProvider client={queryClient}>
+    <BrowserRouter>
+      <div className='min-h-screen bg-gray-50'>
+        <Header />
+        <AppRoutes />
+      </div>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </BrowserRouter>
+  </QueryClientProvider>
+);
