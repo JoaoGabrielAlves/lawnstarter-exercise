@@ -1,27 +1,37 @@
-export interface ApiResponse<T> {
-  data: T;
-  message?: string;
-  success: boolean;
+export interface StarWarsPerson {
+  id: number;
+  name: string;
+  birth_year: string;
+  gender: string;
+  eye_color: string;
+  hair_color: string;
+  height: string;
+  mass: string;
+  films: Array<{
+    id: number;
+    title: string;
+  }>;
 }
 
-export interface PaginatedResponse<T> {
-  data: T[];
-  meta: {
-    current_page: number;
-    last_page: number;
-    per_page: number;
-    total: number;
-  };
-  links: {
-    first: string;
-    last: string;
-    prev?: string;
-    next?: string;
-  };
+export interface StarWarsFilm {
+  id: number;
+  title: string;
+  episode_id: number;
+  opening_crawl: string;
+  director: string;
+  producer: string;
+  release_date: string;
+  characters: Array<{
+    id: number;
+    name: string;
+  }>;
 }
 
-export interface QueryError {
-  message: string;
-  errors?: Record<string, string[]>;
-  status?: number;
+export interface StarWarsSearchResult {
+  id: number;
+  name?: string;
+  title?: string;
+  [key: string]: unknown;
 }
+
+export type SearchResourceType = 'people' | 'films';

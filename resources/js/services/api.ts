@@ -5,7 +5,10 @@ const getCSRFToken = () => {
   return meta?.content;
 };
 
-const apiFetch = async (endpoint: string, options: RequestInit = {}) => {
+const apiFetch = async (
+  endpoint: string,
+  options: globalThis.RequestInit = {}
+) => {
   const response = await fetch(`/api${endpoint}`, {
     headers: {
       'Content-Type': 'application/json',
