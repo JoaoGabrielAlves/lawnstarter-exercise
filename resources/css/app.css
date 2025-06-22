@@ -1,4 +1,5 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -7,8 +8,20 @@
 @source '../**/*.ts';
 
 @theme {
-    --font-sans:
-        "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-        "Noto Color Emoji";
+  --font-sans: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  --font-montserrat: 'Montserrat', sans-serif;
+  
+  --color-card-border: #DADADA;
+  --color-divider: #C4C4C4;
+  --color-character-link: #0094FF;
+  --color-character-comma: #383838;
+  --color-button-green: #0AB463;
+  --color-button-green-hover: #089954;
+  --shadow-card: 0 1px 2px 0 rgba(132, 132, 132, 0.75);
+}
+
+@layer base {
+  * {
+    font-family: 'Montserrat', sans-serif;
+  }
 }
