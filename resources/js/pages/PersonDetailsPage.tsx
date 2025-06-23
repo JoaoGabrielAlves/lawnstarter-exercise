@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import PersonDetails from '@/components/PersonDetails';
+import { PersonDetails } from '@/components/details';
 
 import {
   useStarWarsPersonBasic,

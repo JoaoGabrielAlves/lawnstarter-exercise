@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import SearchForm from '@/components/SearchForm';
-import SearchResults from '@/components/SearchResults';
+import { SearchForm, SearchResults } from '@/components/search';
 
 import { useStarWarsSearch } from '../hooks/useStarWars';
 import { SearchResourceType } from '../types';

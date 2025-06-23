@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { BrowserRouter } from 'react-router-dom';
 
-import Header from '@/components/Header';
+import { Header } from '@/components/layout';
 import AppRoutes from './Routes';
 
 const queryClient = new QueryClient();

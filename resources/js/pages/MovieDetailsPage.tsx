@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import MovieDetails from '@/components/MovieDetails';
+import { MovieDetails } from '@/components/details';
 
 import {
   useStarWarsFilmBasic,
