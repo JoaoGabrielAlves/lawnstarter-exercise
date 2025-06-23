@@ -7,8 +7,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StarWarsSearchRequest;
 use App\Services\Contracts\StarWarsServiceContract;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 final class StarWarsController extends Controller
 {
@@ -22,6 +22,7 @@ final class StarWarsController extends Controller
     public function index(): JsonResponse
     {
         $data = $this->starWarsService->getResources();
+
         return response()->json(['success' => true, 'data' => $data]);
     }
 
@@ -42,6 +43,27 @@ final class StarWarsController extends Controller
     public function getPerson(int $id): JsonResponse
     {
         $data = $this->starWarsService->getPerson($id);
+
+        return response()->json(['success' => true, 'data' => $data]);
+    }
+
+    /**
+     * Get basic person data without resolved relationships (fast)
+     */
+    public function getPersonBasic(int $id): JsonResponse
+    {
+        $data = $this->starWarsService->getPersonBasic($id);
+
+        return response()->json(['success' => true, 'data' => $data]);
+    }
+
+    /**
+     * Get resolved films for a person
+     */
+    public function getPersonFilms(int $id): JsonResponse
+    {
+        $data = $this->starWarsService->getPersonFilms($id);
+
         return response()->json(['success' => true, 'data' => $data]);
     }
 
@@ -62,6 +84,27 @@ final class StarWarsController extends Controller
     public function getFilm(int $id): JsonResponse
     {
         $data = $this->starWarsService->getFilm($id);
+
+        return response()->json(['success' => true, 'data' => $data]);
+    }
+
+    /**
+     * Get basic film data without resolved relationships (fast)
+     */
+    public function getFilmBasic(int $id): JsonResponse
+    {
+        $data = $this->starWarsService->getFilmBasic($id);
+
+        return response()->json(['success' => true, 'data' => $data]);
+    }
+
+    /**
+     * Get resolved characters for a film
+     */
+    public function getFilmCharacters(int $id): JsonResponse
+    {
+        $data = $this->starWarsService->getFilmCharacters($id);
+
         return response()->json(['success' => true, 'data' => $data]);
     }
 
@@ -82,6 +125,7 @@ final class StarWarsController extends Controller
     public function getStarship(int $id): JsonResponse
     {
         $data = $this->starWarsService->getStarship($id);
+
         return response()->json(['success' => true, 'data' => $data]);
     }
 
@@ -102,6 +146,7 @@ final class StarWarsController extends Controller
     public function getVehicle(int $id): JsonResponse
     {
         $data = $this->starWarsService->getVehicle($id);
+
         return response()->json(['success' => true, 'data' => $data]);
     }
 
@@ -122,6 +167,7 @@ final class StarWarsController extends Controller
     public function getSpeciesById(int $id): JsonResponse
     {
         $data = $this->starWarsService->getSpeciesById($id);
+
         return response()->json(['success' => true, 'data' => $data]);
     }
 
@@ -142,6 +188,7 @@ final class StarWarsController extends Controller
     public function getPlanet(int $id): JsonResponse
     {
         $data = $this->starWarsService->getPlanet($id);
+
         return response()->json(['success' => true, 'data' => $data]);
     }
 
@@ -155,7 +202,7 @@ final class StarWarsController extends Controller
         $data = $this->starWarsService->search(
             $resource,
             $validated['q'],
-            (int) ($validated['page'] ?? 1)
+            (int) data_get($validated, 'page', 1)
         );
 
         return $this->formatCollectionResponse($data);
@@ -167,22 +214,20 @@ final class StarWarsController extends Controller
         $page = (int) $request->query('page', 1);
 
         $data = $serviceMethod($search, $page);
-        
+
         return $this->formatCollectionResponse($data);
     }
 
     private function formatCollectionResponse(array $data): JsonResponse
     {
-        // SWAPI returns paginated data in format: { count, next, previous, results }
-        // We'll structure our response to match a clean API format
         return response()->json([
             'success' => true,
-            'data' => $data['results'] ?? [],
+            'data' => data_get($data, 'results', []),
             'meta' => [
-                'count' => $data['count'] ?? 0,
-                'next' => $data['next'] ?? null,
-                'previous' => $data['previous'] ?? null,
-            ]
+                'count' => data_get($data, 'count', 0),
+                'next' => data_get($data, 'next'),
+                'previous' => data_get($data, 'previous'),
+            ],
         ]);
     }
 }

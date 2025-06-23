@@ -30,4 +30,19 @@ interface StarWarsRepositoryContract
      * Search within a resource type
      */
     public function search(string $resource, string $query, int $page = 1): array;
+
+    /**
+     * Get basic resource data without resolving relationships
+     */
+    public function getBasicById(string $resource, int $id): array;
+
+    /**
+     * Resolve film relationships for a resource
+     */
+    public function resolveFilmsForResource(array $filmUrls): array;
+
+    /**
+     * Resolve character relationships for a resource
+     */
+    public function resolveCharactersForResource(array $characterUrls): array;
 }

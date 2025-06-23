@@ -22,6 +22,16 @@ interface StarWarsServiceContract
     public function getPerson(int $id): array;
 
     /**
+     * Get basic person data without resolved relationships
+     */
+    public function getPersonBasic(int $id): array;
+
+    /**
+     * Get resolved films for a person
+     */
+    public function getPersonFilms(int $id): array;
+
+    /**
      * Get all films with optional search
      */
     public function getFilms(?string $search = null, int $page = 1): array;
@@ -30,6 +40,16 @@ interface StarWarsServiceContract
      * Get a specific film by ID
      */
     public function getFilm(int $id): array;
+
+    /**
+     * Get basic film data without resolved relationships
+     */
+    public function getFilmBasic(int $id): array;
+
+    /**
+     * Get resolved characters for a film
+     */
+    public function getFilmCharacters(int $id): array;
 
     /**
      * Get all starships with optional search

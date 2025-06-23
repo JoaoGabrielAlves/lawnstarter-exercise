@@ -32,6 +32,22 @@ final class StarWarsService implements StarWarsServiceContract
         return $this->repository->getById('people', $id);
     }
 
+    public function getPersonBasic(int $id): array
+    {
+        return $this->repository->getBasicById('people', $id);
+    }
+
+    public function getPersonFilms(int $id): array
+    {
+        $person = $this->repository->getBasicById('people', $id);
+
+        if (empty($person['films'])) {
+            return [];
+        }
+
+        return $this->repository->resolveFilmsForResource($person['films']);
+    }
+
     public function getFilms(?string $search = null, int $page = 1): array
     {
         return $this->getResourceData('films', $search, $page);
@@ -40,6 +56,22 @@ final class StarWarsService implements StarWarsServiceContract
     public function getFilm(int $id): array
     {
         return $this->repository->getById('films', $id);
+    }
+
+    public function getFilmBasic(int $id): array
+    {
+        return $this->repository->getBasicById('films', $id);
+    }
+
+    public function getFilmCharacters(int $id): array
+    {
+        $film = $this->repository->getBasicById('films', $id);
+
+        if (empty($film['characters'])) {
+            return [];
+        }
+
+        return $this->repository->resolveCharactersForResource($film['characters']);
     }
 
     public function getStarships(?string $search = null, int $page = 1): array
