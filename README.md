@@ -1,61 +1,114 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# LawnStarter Exercise - Star Wars API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A full-stack application built with Laravel and React that searches the Star Wars API and tracks usage statistics.
 
-## About Laravel
+## 📚 Documentation
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **[Docker Setup Guide](DOCKER.md)** - Comprehensive Docker setup instructions
+- **[Technical Decisions](TECHNICAL_DECISIONS.md)** - Architecture and technology choices explained
+- **[Submission Overview](SUBMISSION.md)** - Quick overview for reviewers
+- **[Short Questions Answers](SHORT_QUESTIONS_ANSWERS.md)** - Responses to assignment questions
+- **[Exercise Feedback](FEEDBACK.md)** - Feedback on the exercise experience
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Quick Start with Docker
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**Prerequisites:** Docker Desktop installed and running
 
-## Learning Laravel
+1. Clone the repository:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+   ```bash
+   git clone <your-repo-url>
+   cd lawnstarter-exercise
+   ```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+2. Run the setup script:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+   ```bash
+   ./docker-setup.sh
+   ```
 
-## Laravel Sponsors
+3. Access the application at <http://localhost:8080>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+That's it! The script handles everything: starting containers, installing dependencies, running migrations, and setting up background workers.
 
-### Premium Partners
+## Manual Docker Commands
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+If you prefer to run commands individually:
 
-## Contributing
+```bash
+# Start containers
+./vendor/bin/sail up -d
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# Install dependencies
+./vendor/bin/sail npm install
+./vendor/bin/sail npm run build
 
-## Code of Conduct
+# Setup database
+./vendor/bin/sail artisan migrate
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# Start background workers
+./vendor/bin/sail artisan queue:work &
+./vendor/bin/sail artisan schedule:work &
+```
 
-## Security Vulnerabilities
+## Development
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Common commands:
+
+```bash
+# Stop containers
+./vendor/bin/sail down
+
+# View logs
+./vendor/bin/sail logs
+
+# Run tests
+./vendor/bin/sail test
+
+# Access container shell
+./vendor/bin/sail shell
+```
+
+## Architecture
+
+**Backend (Laravel):**
+
+- REST API for Star Wars data
+- PostgreSQL database
+- Redis for caching and queues
+- Background job processing for statistics
+
+**Frontend (React + TypeScript):**
+
+- Search interface
+- Character and movie details
+- Modern responsive UI
+
+## API Endpoints
+
+- `GET /api/v1/starwars/search/{resource}?query={term}` - Search (resource: people, films, etc.)
+- `GET /api/v1/starwars/people/{id}` - Character details
+- `GET /api/v1/starwars/films/{id}` - Movie details
+- `GET /api/v1/statistics` - Usage statistics
+
+## Features
+
+- Real-time search with the Star Wars API
+- Detailed character and movie pages
+- Automatic statistics computation every 5 minutes
+- Complete request logging and analytics
+- Fully containerized with Docker
+
+## Non-Docker Setup
+
+If you prefer running without Docker:
+
+1. Requirements: PHP 8.2+, Node.js 18+, PostgreSQL, Redis
+2. Install: `composer install && npm install`
+3. Configure `.env` with your database credentials
+4. Run: `php artisan migrate && php artisan serve`
+5. Frontend: `npm run dev`
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+MIT License
