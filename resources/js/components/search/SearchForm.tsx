@@ -1,5 +1,5 @@
 import { type FC, type FormEvent, useState } from 'react';
-import { SearchResourceType } from '../types';
+import { SearchResourceType } from '../../types';
 
 interface SearchFormProps {
   onSearch: (resource: SearchResourceType, query: string) => void;

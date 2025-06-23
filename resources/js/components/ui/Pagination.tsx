@@ -1,6 +1,6 @@
 import { type FC } from 'react';
-import { PaginationMeta } from '../types';
-import PageIndicator from './PageIndicator';
+import { PaginationMeta } from '../../types';
+import { PageIndicator } from './';
 
 interface PaginationProps {
   meta: PaginationMeta;

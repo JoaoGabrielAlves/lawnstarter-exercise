@@ -1,5 +1,5 @@
 import { type FC, Fragment } from 'react';
-import { StarWarsPerson } from '../types';
+import { StarWarsPerson } from '../../types';
 
 interface PersonDetailsProps {
   person: StarWarsPerson;

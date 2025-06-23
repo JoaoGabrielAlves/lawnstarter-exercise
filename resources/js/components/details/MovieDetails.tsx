@@ -1,5 +1,5 @@
 import { type FC, Fragment } from 'react';
-import { StarWarsFilm } from '../types';
+import { StarWarsFilm } from '../../types';
 
 interface MovieDetailsProps {
   film: StarWarsFilm;

@@ -3,8 +3,8 @@ import {
   StarWarsSearchResult,
   SearchResourceType,
   PaginationMeta,
-} from '../types';
-import Pagination from './Pagination';
+} from '../../types';
+import { Pagination } from '../ui';
 
 interface SearchResultsProps {
   results: StarWarsSearchResult[];
