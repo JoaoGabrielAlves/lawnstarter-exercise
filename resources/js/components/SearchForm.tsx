@@ -27,7 +27,7 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch, isLoading = false }) => {
   };
 
   return (
-    <div className='w-[410px] h-[230px] p-[30px] bg-white border border-card-border rounded shadow-card flex flex-col'>
+    <div className='w-full max-w-[410px] h-[230px] p-[30px] bg-white border border-card-border rounded shadow-card flex flex-col'>
       <h2 className='text-[16px] font-bold text-black mb-[10px]'>
         What are you searching for?
       </h2>
