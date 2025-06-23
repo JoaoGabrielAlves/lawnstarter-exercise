@@ -21,7 +21,15 @@ A full-stack application built with Laravel and React that searches the Star War
    cd lawnstarter-exercise
    ```
 
-2. Run the setup script:
+2. Create your environment file:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   The `.env.example` already contains all the Docker-optimized defaults.
+
+3. Run the setup script:
 
    ```bash
    ./docker-setup.sh
@@ -36,6 +44,9 @@ That's it! The script handles everything: starting containers, installing depend
 If you prefer to run commands individually:
 
 ```bash
+# Create environment file
+cp .env.example .env
+
 # Start containers
 ./vendor/bin/sail up -d
 
