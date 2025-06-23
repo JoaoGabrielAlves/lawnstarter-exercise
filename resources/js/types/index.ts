@@ -34,4 +34,16 @@ export interface StarWarsSearchResult {
   [key: string]: unknown;
 }
 
+export interface PaginationMeta {
+  count: number;
+  next: string | null;
+  previous: string | null;
+}
+
+export interface StarWarsApiResponse<T = StarWarsSearchResult[]> {
+  success: boolean;
+  data: T;
+  meta?: PaginationMeta;
+}
+
 export type SearchResourceType = 'people' | 'films';

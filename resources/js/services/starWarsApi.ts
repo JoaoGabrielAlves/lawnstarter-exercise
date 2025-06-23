@@ -20,6 +20,16 @@ export const starWarsApi = {
     return api.get(`/v1/starwars/people/${id}`);
   },
 
+  // New: Get basic person data without relationships (fast)
+  getPersonBasic: (id: number) => {
+    return api.get(`/v1/starwars/people/${id}/basic`);
+  },
+
+  // New: Get resolved films for a person
+  getPersonFilms: (id: number) => {
+    return api.get(`/v1/starwars/people/${id}/films`);
+  },
+
   getFilms: (search?: string, page = 1) => {
     const params = new URLSearchParams({ page: page.toString() });
     if (search) params.append('search', search);
@@ -28,5 +38,15 @@ export const starWarsApi = {
 
   getFilm: (id: number) => {
     return api.get(`/v1/starwars/films/${id}`);
+  },
+
+  // New: Get basic film data without relationships (fast)
+  getFilmBasic: (id: number) => {
+    return api.get(`/v1/starwars/films/${id}/basic`);
+  },
+
+  // New: Get resolved characters for a film
+  getFilmCharacters: (id: number) => {
+    return api.get(`/v1/starwars/films/${id}/characters`);
   },
 };
