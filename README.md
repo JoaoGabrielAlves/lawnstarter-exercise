@@ -1,124 +1,69 @@
 # LawnStarter Exercise - Star Wars API
 
-A full-stack application built with Laravel and React that searches the Star Wars API and tracks usage statistics.
+A full-stack application using Laravel and React that searches the Star Wars API and tracks usage statistics.
 
-## 📚 Documentation
+## 📚 Project Documentation
 
-- **[Docker Setup Guide](DOCKER.md)** - Comprehensive Docker setup instructions
-- **[Technical Decisions](TECHNICAL_DECISIONS.md)** - Architecture and technology choices explained
-- **[Submission Overview](SUBMISSION.md)** - Quick overview for reviewers
-- **[Short Questions Answers](SHORT_QUESTIONS_ANSWERS.md)** - Responses to assignment questions
-- **[Exercise Feedback](FEEDBACK.md)** - Feedback on the exercise experience
+- **[Docker Setup](DOCKER.md)**: For running the app with Docker.
+- **[Technical Decisions](TECHNICAL_DECISIONS.md)**: Explains architecture and technology choices.
+- **[Submission Overview](SUBMISSION.md)**: A quick summary for reviewers.
+- **[Short Questions Answers](SHORT_QUESTIONS_ANSWERS.md)**: Assignment question responses.
+- **[Exercise Feedback](FEEDBACK.md)**: Feedback on the exercise.
 
-## Quick Start with Docker
+## 🚀 Quick Start (Docker)
 
-**Prerequisites:** Docker Desktop installed and running
+**Prerequisites**: Docker Desktop must be installed and running.
 
-1. Clone the repository:
+1. Clone the repository and navigate into the project directory.
+2. Create the environment file: `cp .env.example .env`
+3. Run the setup script: `./docker-setup.sh`
+4. Access the application at: <http://localhost:8080>
 
-   ```bash
-   git clone <your-repo-url>
-   cd lawnstarter-exercise
-   ```
+The setup script handles container creation, dependency installation, database migration, and background worker initialization.
 
-2. Create your environment file:
+## ⚙️ Manual Docker Commands
 
-   ```bash
-   cp .env.example .env
-   ```
-
-   The `.env.example` already contains all the Docker-optimized defaults.
-
-3. Run the setup script:
-
-   ```bash
-   ./docker-setup.sh
-   ```
-
-3. Access the application at <http://localhost:8080>
-
-That's it! The script handles everything: starting containers, installing dependencies, running migrations, and setting up background workers.
-
-## Manual Docker Commands
-
-If you prefer to run commands individually:
+For step-by-step control:
 
 ```bash
-# Create environment file
-cp .env.example .env
-
-# Start containers
+# Start containers in detached mode
 ./vendor/bin/sail up -d
 
-# Install dependencies
+# Install dependencies and build assets
 ./vendor/bin/sail npm install
 ./vendor/bin/sail npm run build
 
-# Setup database
+# Run database migrations
 ./vendor/bin/sail artisan migrate
 
-# Start background workers
+# Start background workers (in separate terminals)
 ./vendor/bin/sail artisan queue:work &
 ./vendor/bin/sail artisan schedule:work &
 ```
 
-## Development
+## 📝 API Endpoints
 
-Common commands:
+- `GET /api/v1/starwars/search/{resource}?query={term}`
+- `GET /api/v1/starwars/people/{id}`
+- `GET /api/v1/starwars/films/{id}`
+- `GET /api/v1/statistics`
 
-```bash
-# Stop containers
-./vendor/bin/sail down
+## ✨ Features
 
-# View logs
-./vendor/bin/sail logs
+- Real-time search of the official Star Wars API.
+- Caching for API responses to improve performance.
+- Detailed views for characters and films.
+- Asynchronous background job processing for analytics.
+- Automated statistics computation every five minutes.
+- Fully containerized with a simple, one-command setup.
 
-# Run tests
-./vendor/bin/sail test
+## 💻 Local Setup (Without Docker)
 
-# Access container shell
-./vendor/bin/sail shell
-```
-
-## Architecture
-
-**Backend (Laravel):**
-
-- REST API for Star Wars data
-- PostgreSQL database
-- Redis for caching and queues
-- Background job processing for statistics
-
-**Frontend (React + TypeScript):**
-
-- Search interface
-- Character and movie details
-- Modern responsive UI
-
-## API Endpoints
-
-- `GET /api/v1/starwars/search/{resource}?query={term}` - Search (resource: people, films, etc.)
-- `GET /api/v1/starwars/people/{id}` - Character details
-- `GET /api/v1/starwars/films/{id}` - Movie details
-- `GET /api/v1/statistics` - Usage statistics
-
-## Features
-
-- Real-time search with the Star Wars API
-- Detailed character and movie pages
-- Automatic statistics computation every 5 minutes
-- Complete request logging and analytics
-- Fully containerized with Docker
-
-## Non-Docker Setup
-
-If you prefer running without Docker:
-
-1. Requirements: PHP 8.2+, Node.js 18+, PostgreSQL, Redis
-2. Install: `composer install && npm install`
-3. Configure `.env` with your database credentials
-4. Run: `php artisan migrate && php artisan serve`
-5. Frontend: `npm run dev`
+1. **Requirements**: PHP 8.2+, Node.js 18+, PostgreSQL, Redis.
+2. **Install**: `composer install && npm install`.
+3. **Configure**: Set up your database credentials in `.env`.
+4. **Backend**: `php artisan migrate && php artisan serve`.
+5. **Frontend**: `npm run dev`.
 
 ## License
 

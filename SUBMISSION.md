@@ -1,50 +1,44 @@
 # LawnStarter Exercise - Submission
 
-Docker setup for the Star Wars API exercise using Laravel Sail.
+This submission uses Laravel Sail for a complete Docker-based development environment.
 
-## Requirements Met ✅
+## Requirements Checklist
 
-✅ **Full Docker containerization** - Everything runs in containers  
-✅ **Mac-friendly** - Laravel Sail works great on Mac  
-✅ **Simple setup** - One command gets everything running  
+- [x] **Fully Containerized**: All services run in Docker containers.
+- [x] **Mac-Compatible**: Laravel Sail is optimized for macOS.
+- [x] **Simple Setup**: A single script handles the entire setup process.
 
-## Quick Start
+## 🚀 Quick Start
 
-1. Make sure Docker Desktop is running
-2. Run: `./docker-setup.sh`
-3. Open <http://localhost:8080>
+1. Ensure Docker Desktop is running.
+2. Run the setup script: `./docker-setup.sh`
+3. Open <http://localhost:8080> in your browser.
 
-## What's Running
+## Services
 
-- **Laravel App**: PHP 8.4 + Node.js + Nginx
-- **PostgreSQL**: Database with persistent storage  
-- **Redis**: Handles caching and background jobs
-- **Full Features**: API, frontend, statistics, queue processing
+- **Application**: PHP 8.4, Node.js, and Nginx
+- **Database**: PostgreSQL with persistent data
+- **Cache & Queues**: Redis
 
-## Testing It Out
+## How to Test
 
 ```bash
-# Test the API
+# Test the search API endpoint
 curl "http://localhost:8080/api/v1/starwars/search/people?query=luke"
+
+# Test the statistics endpoint
 curl "http://localhost:8080/api/v1/statistics"
 
-# Run the test suite
+# Run the full test suite
 ./vendor/bin/sail test
 ```
 
-## Why Laravel Sail
+## Rationale for Laravel Sail
 
-- Official Laravel Docker solution
-- Zero configuration needed
-- Includes everything (PHP, Node.js, databases)
-- Optimized for Mac development
-- Easy to scale up for production
+Laravel Sail was chosen because it is the official, zero-configuration Docker solution for Laravel. It provides a simple, powerful, and Mac-friendly development experience out of the box.
 
 ## Files Added
 
-- `docker-compose.yml` - Container configuration
-- `docker-setup.sh` - One-command setup
-- `DOCKER.md` - Detailed setup guide
-- `.dockerignore` - Build optimization
-
-The app should work immediately after running the setup script on any Mac with Docker Desktop.
+- `docker-compose.yml`: Defines the Docker services.
+- `docker-setup.sh`: Automates the setup process.
+- `DOCKER.md`: Provides detailed setup instructions.

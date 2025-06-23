@@ -2,36 +2,20 @@
 
 ## 1. What parts of this did you enjoy?
 
-**The full-stack nature**: I really enjoyed being able to work on both the API and the frontend. It's satisfying to build a feature end-to-end and see it working in the browser. The React + Laravel combo felt natural to work with.
-
-**The statistics requirement**: This was the most interesting part technically. Figuring out how to capture API requests, process them in the background, and compute meaningful statistics felt like solving a real production problem. The queue and scheduler integration was fun to implement.
-
-**Docker setup**: Getting everything running with a single command is always satisfying. Laravel Sail made this pretty straightforward, and I like that it creates a consistent environment that should work the same way on any machine.
-
-**Working with a real API**: Using the actual Star Wars API instead of mock data made it feel more realistic. Had to think about error handling, rate limiting, and data transformation - all things you'd deal with in a real app.
+* **Full-Stack Scope**: Building a feature end-to-end, from the Laravel API to the React frontend, was very satisfying.
+* **The Statistics Challenge**: The requirement to track and process API usage statistics was a great technical problem. Implementing the background jobs and scheduled tasks felt like building a real-world production feature.
+* **Streamlined Docker Environment**: Using Laravel Sail to create a one-command setup was a highlight. It ensures a consistent development environment.
+* **Real-World API Integration**: Interacting with the live Star Wars API made the task more practical, requiring consideration for error handling and data transformation.
 
 ## 2. What parts of this did you dislike?
 
-**Time constraints vs. polish**: There's always tension between getting all the features working and making them polished. I spent more time on the core functionality and less on things like comprehensive error handling and UI polish.
-
-**Limited testing time**: I set up the testing framework but didn't have time to write comprehensive tests. In a real project, I'd want much better test coverage before calling it done.
+* **Time vs. Polish**: With the time available, I prioritized core functionality over UI polish and comprehensive error states.
+* **Testing Coverage**: While the testing framework is in place, I didn't have time to write as many tests as I would for a production application.
 
 ## 3. Any other comments/feedback?
 
-**What worked well about the exercise**:
+**Overall impressions**:
 
-- Good scope - challenging enough to show technical skills without being overwhelming
-- The Docker requirement shows you care about deployment and developer experience
-- The statistics requirement demonstrates understanding of production concerns like async processing
-- Flexibility in tech choices lets candidates show their reasoning
+The exercise is a great assessment of the skills needed for the role, as it mirrors the practical, day-to-day work of a full-stack developer. The combination of API development, frontend work, and background processing covers a realistic feature slice.
 
-**Suggestions**:
-
-- Maybe some guidance on how much time to spend on each part (API vs frontend vs Docker setup)
-
-**Overall thoughts**:
-This exercise does a good job of testing the skills that would actually matter for the LawnStarter role. The combination of API development, frontend work, background processing, and Docker deployment covers most of what you'd be doing day-to-day.
-
-It's also realistic in scope - not some artificial algorithm problem, but the kind of feature you might actually build for a service marketplace. The time constraint forces you to make practical decisions about what to prioritize, which is also realistic.
-
-I think this gives a much better sense of how someone would actually perform in the role than a traditional coding interview.
+The problem is practical and relevant, avoiding abstract algorithm challenges in favor of a task that feels like it could be part of the actual LawnStarter platform.

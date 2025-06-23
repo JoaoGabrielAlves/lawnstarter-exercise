@@ -1,13 +1,15 @@
 # Docker Setup Guide
 
-Complete Docker setup for the LawnStarter Exercise, optimized for Mac users.
+This guide provides complete Docker setup instructions for the project, using Laravel Sail.
 
 ## Prerequisites
 
-1. **Docker Desktop for Mac** - Download from <https://www.docker.com/products/docker-desktop>
-2. **Git** (pre-installed on most Macs)
+- Docker Desktop for Mac
+- Git (pre-installed on most modern operating systems)
 
 ## Quick Setup
+
+From your terminal, clone the repository and run the setup script:
 
 ```bash
 git clone <repository-url>
@@ -15,103 +17,73 @@ cd lawnstarter-exercise
 ./docker-setup.sh
 ```
 
-The setup script automatically:
+The script automates the entire setup:
+- Starts all Docker containers.
+- Installs backend and frontend dependencies.
+- Builds frontend assets.
+- Runs database migrations.
+- Starts background queue and schedule workers.
 
-- Starts all Docker containers
-- Installs Node.js dependencies
-- Builds frontend assets
-- Runs database migrations
-- Starts background workers
-
-Access your app at <http://localhost>
+Once complete, access the application at <http://localhost:8080> (or the `APP_PORT` set in your `.env` file).
 
 ## What's Included
 
-The Docker setup provides:
-
-- **Application Container**: PHP 8.4 + Node.js 22 + Nginx
-- **PostgreSQL 17**: Database with persistent storage
-- **Redis**: Caching, sessions, and job queues
+The Docker environment consists of three services:
+- **Application**: An image with PHP 8.4, Node.js 22, and Nginx.
+- **Database**: PostgreSQL 17 with a persistent volume for data.
+- **Cache**: Redis for caching, session storage, and job queues.
 
 ## Manual Commands
 
-If you prefer step-by-step control:
+For more granular control, you can run the setup steps manually.
 
 ```bash
-# Start containers
+# Start all containers in detached mode
 ./vendor/bin/sail up -d
 
-# Install and build frontend
+# Install Node.js dependencies and build assets
 ./vendor/bin/sail npm install
 ./vendor/bin/sail npm run build
 
-# Setup database
+# Run database migrations
 ./vendor/bin/sail artisan migrate
 
-# Start workers (in separate terminals)
+# Start background workers (use separate terminal sessions)
 ./vendor/bin/sail artisan queue:work
 ./vendor/bin/sail artisan schedule:work
 ```
 
-## Development Workflow
+## Common Development Commands
 
 ```bash
 # View running containers
 ./vendor/bin/sail ps
 
-# Check logs
+# Check container logs
 ./vendor/bin/sail logs
 
-# Stop everything
+# Stop all services
 ./vendor/bin/sail down
 
-# Run tests
+# Run the test suite
 ./vendor/bin/sail test
 
-# Access database
+# Access the PostgreSQL CLI
 ./vendor/bin/sail psql
 
-# Shell access
+# Open a shell inside the application container
 ./vendor/bin/sail shell
 ```
 
 ## Environment Configuration
 
-Your `.env` file is pre-configured for Docker:
-
-```env
-DB_HOST=pgsql
-DB_USERNAME=sail
-DB_PASSWORD=password
-REDIS_HOST=redis
-APP_URL=http://localhost
-```
-
-## Testing the Setup
-
-Once running, test these endpoints:
-
-```bash
-# Search API
-curl "http://localhost:8080/api/v1/starwars/search/people?query=luke"
-
-# Statistics
-curl "http://localhost:8080/api/v1/statistics"
-```
+The `.env` file is pre-configured to work with Docker. The default `APP_PORT` is `8080`. If this port is taken, you can change it in your `.env` file.
 
 ## Troubleshooting
 
-**Docker not running?**
-Start Docker Desktop and wait for it to fully load.
-
-**Port conflicts?**
-Change `APP_PORT=8080` in your `.env` file.
-
-**Containers won't start?**
-Try: `./vendor/bin/sail down && ./vendor/bin/sail up -d`
-
-**Performance issues on Mac?**
-Allocate at least 4GB RAM to Docker in Docker Desktop preferences.
+- **Docker not running**: Ensure Docker Desktop is started and has finished initializing.
+- **Port conflicts**: Change `APP_PORT` in your `.env` file to an available port.
+- **Container issues**: Run `./vendor/bin/sail down && ./vendor/bin/sail up -d` to fully restart the services.
 
 ## Convenience Alias
 
