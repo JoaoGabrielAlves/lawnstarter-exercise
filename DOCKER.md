@@ -18,6 +18,7 @@ cd lawnstarter-exercise
 ```
 
 The script automates the entire setup:
+
 - Starts all Docker containers.
 - Installs backend and frontend dependencies.
 - Builds frontend assets.
@@ -29,6 +30,7 @@ Once complete, access the application at <http://localhost:8080> (or the `APP_PO
 ## What's Included
 
 The Docker environment consists of three services:
+
 - **Application**: An image with PHP 8.4, Node.js 22, and Nginx.
 - **Database**: PostgreSQL 17 with a persistent volume for data.
 - **Cache**: Redis for caching, session storage, and job queues.
