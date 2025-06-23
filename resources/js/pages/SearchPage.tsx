@@ -13,10 +13,12 @@ const SearchPage: React.FC = () => {
     resource: SearchResourceType;
     query: string;
     hasSearched: boolean;
+    currentPage: number;
   }>({
     resource: 'people',
     query: '',
     hasSearched: false,
+    currentPage: 1,
   });
 
   const {
@@ -26,7 +28,7 @@ const SearchPage: React.FC = () => {
   } = useStarWarsSearch(
     searchState.resource,
     searchState.query,
-    1,
+    searchState.currentPage,
     searchState.hasSearched && searchState.query.length > 0
   );
 
@@ -35,7 +37,15 @@ const SearchPage: React.FC = () => {
       resource,
       query,
       hasSearched: true,
+      currentPage: 1, // Reset to first page on new search
     });
+  };
+
+  const handlePageChange = (page: number) => {
+    setSearchState((prev) => ({
+      ...prev,
+      currentPage: page,
+    }));
   };
 
   const handleViewDetails = (id: number, type: SearchResourceType) => {
@@ -47,16 +57,20 @@ const SearchPage: React.FC = () => {
   };
 
   const results = searchResults?.data || [];
+  const meta = searchResults?.meta;
 
   return (
     <div className='min-h-screen bg-gray-50 pt-20'>
-      <div className='flex justify-center gap-8'>
+      <div className='flex flex-col md:flex-row justify-center gap-8 px-4'>
         <SearchForm onSearch={handleSearch} isLoading={isLoading} />
         <SearchResults
           results={results}
           resourceType={searchState.resource}
           isLoading={isLoading}
           onViewDetails={handleViewDetails}
+          meta={meta}
+          currentPage={searchState.currentPage}
+          onPageChange={handlePageChange}
           noResultsMessage={
             error
               ? `Error: ${error.message}`

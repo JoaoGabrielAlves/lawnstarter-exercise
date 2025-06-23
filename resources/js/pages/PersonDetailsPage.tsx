@@ -3,7 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import PersonDetails from '@/components/PersonDetails';
 
-import { useStarWarsPerson } from '../hooks/useStarWars';
+import {
+  useStarWarsPersonBasic,
+  useStarWarsPersonFilms,
+} from '../hooks/useStarWars';
 import { StarWarsPerson } from '../types';
 
 const PersonDetailsPage: React.FC = () => {
@@ -11,7 +14,17 @@ const PersonDetailsPage: React.FC = () => {
   const navigate = useNavigate();
   const personId = parseInt(id || '0', 10);
 
-  const { data: personData, isLoading, error } = useStarWarsPerson(personId);
+  const {
+    data: personData,
+    isLoading: isPersonLoading,
+    error: personError,
+  } = useStarWarsPersonBasic(personId);
+
+  const {
+    data: filmsData,
+    isLoading: isFilmsLoading,
+    error: filmsError,
+  } = useStarWarsPersonFilms(personId, !!personData);
 
   const handleBackToSearch = () => {
     navigate('/');
@@ -21,12 +34,14 @@ const PersonDetailsPage: React.FC = () => {
     navigate(`/movie/${movieId}`);
   };
 
-  if (error) {
+  if (personError || filmsError) {
+    const errorMessage =
+      personError?.message || filmsError?.message || 'Unknown error';
     return (
-      <div className='min-h-screen bg-gray-50 pt-20 flex justify-center'>
-        <div className='w-[804px] bg-white border border-card-border shadow-card border-radius-4 rounded p-8'>
+      <div className='min-h-screen bg-gray-50 pt-20 flex justify-center px-4'>
+        <div className='w-full max-w-[804px] bg-white border border-card-border shadow-card border-radius-4 rounded p-8'>
           <p className='text-red-500 text-center mb-6'>
-            Error loading person details: {error.message}
+            Error loading person details: {errorMessage}
           </p>
           <div className='text-center'>
             <button
@@ -42,8 +57,8 @@ const PersonDetailsPage: React.FC = () => {
   }
 
   return (
-    <div className='min-h-screen bg-gray-50 pt-20 flex justify-center'>
-      {isLoading || !personData ? (
+    <div className='min-h-screen bg-gray-50 pt-20 flex justify-center px-4'>
+      {isPersonLoading || !personData ? (
         <PersonDetails
           person={{} as StarWarsPerson}
           onBackToSearch={handleBackToSearch}
@@ -53,8 +68,10 @@ const PersonDetailsPage: React.FC = () => {
       ) : (
         <PersonDetails
           person={personData.data}
+          films={filmsData?.data || []}
           onBackToSearch={handleBackToSearch}
           onMovieClick={handleMovieClick}
+          isFilmsLoading={isFilmsLoading}
         />
       )}
     </div>
